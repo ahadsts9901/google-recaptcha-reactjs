@@ -10,3 +10,5 @@ const App = () => {
 }
 
 export default App
+
+// https://www.google.com/recaptcha/admin/create
