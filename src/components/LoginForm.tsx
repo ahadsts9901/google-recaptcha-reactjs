@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import useRecaptcha from './useRecaptcha';
+import useRecaptcha from '../hooks/useRecaptcha';
 
 const LoginForm = () => {
   const { capchaToken, recaptchaRef, handleRecaptcha } = useRecaptcha();
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (capchaToken && username && password) {
+    if (capchaToken) {
       // Send login request with captcha token, username, and password
       const result = await axios.post(`https://your-login-endpoint`, {
         username,
