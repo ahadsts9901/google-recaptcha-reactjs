@@ -1,24 +1,25 @@
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import useRecaptcha from '../hooks/useRecaptcha';
+import axios from "axios"
 
 const LoginForm = () => {
   const { capchaToken, recaptchaRef, handleRecaptcha } = useRecaptcha();
-  
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = async (e: any) => {
+
+    e?.preventDefault();
     if (capchaToken) {
-      // Send login request with captcha token, username, and password
-      const result = await axios.post(`https://your-login-endpoint`, {
-        username,
-        password,
+
+      const result = await axios.post(`https://social-media-web-0lwr.onrender.com/api/v1/login`, {
+        email: username,
+        password: password,
         capchaToken,
       });
 
-      // Check if the reCAPTCHA validation failed on the server-side
       if (result.data.recaptchaValid === false) {
         alert('ReCAPTCHA validation failed. Please try again.');
         handleRecaptcha('');
@@ -28,20 +29,16 @@ const LoginForm = () => {
         return;
       }
 
-      // Reset captcha after submission
       recaptchaRef.current?.reset();
 
-      // If the login is successful, perform post-login logic
       if (result.data.success) {
-        // Example post-login logic:
-        // - Store user token or session data
-        // - Redirect to a protected page
-        // - Update user state in the application
+
         console.log('Login successful');
-        // ...
+
       } else {
-        // If the login fails, display an error message to the user
+
         alert('Login failed. Please check your credentials and try again.');
+
       }
     } else {
       alert('Please fill in all fields and complete the captcha.');
