@@ -1,9 +1,10 @@
-import LoginForm from "./components/LoginForm"
+import "./App.css"
+import Captcha from "./components/Captcha"
 
 const App = () => {
   return (
     <>
-      <LoginForm />
+      <Captcha />
     </>
   )
 }

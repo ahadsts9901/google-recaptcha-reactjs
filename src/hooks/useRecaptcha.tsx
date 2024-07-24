@@ -1,8 +1,9 @@
+import "../App.css"
 import { useState, useRef, useCallback, useEffect } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 const useRecaptcha = () => {
-  
+
   const [capchaToken, setCapchaToken] = useState<string>('');
   const recaptchaRef = useRef<ReCAPTCHA | null>(null);
 
