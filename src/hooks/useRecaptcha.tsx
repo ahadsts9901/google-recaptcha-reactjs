@@ -17,7 +17,7 @@ const useRecaptcha = () => {
       }
     };
 
-    let tokenRefreshTimeout: NodeJS.Timeout | null = null;
+    let tokenRefreshTimeout: any = null;
 
     if (capchaToken) {
       tokenRefreshTimeout = setTimeout(refreshCaptcha, 110000); // 110 seconds
